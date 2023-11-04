@@ -1,4 +1,4 @@
-CREATE DATABASE BlogDB
+﻿CREATE DATABASE BlogDB
 
 USE BlogDB
 
@@ -98,6 +98,27 @@ AS
 SELECT * FROM Blogs
 WHERE Blogs.UserId = @userId
 
+-------------- Burdaki iki dene funksiyani men yazmamişdim(daha doğrusu çatdıra bilmemişdim sinifde)
+-------------- Indi yazdim praktika olsun deyib. 
+CREATE FUNCTION filterBlogsByCategory(@category INT)
+RETURNS INT
+AS
+BEGIN
+  DECLARE @blogCount INT 
+  SELECT @blogCount = COUNT(*) FROM Blogs
+  WHERE Blogs.CategoryId = @category
+  RETURN @blogCount
+END
+
+
+CREATE FUNCTION GetUsersBlogTable(@userId INT)
+RETURNS TABLE
+AS
+RETURN
+	SELECT B.Id , B.Title , B.Descrption , B.UserId FROM Blogs AS B
+	WHERE B.UserId = @userId
+
+-------------------------
 
 Alter TRIGGER TRG_CHANGE_ISDELETED
 ON Blogs
