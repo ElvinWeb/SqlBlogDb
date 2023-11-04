@@ -88,15 +88,15 @@ SELECT * FROM CW_GET_Blogs_Data
 
 CREATE PROCEDURE User_Comments @userId INT
 AS
-SELECT * FROM Users
-WHERE Users.Id = @userId
+SELECT * FROM Comments
+WHERE Comments.UserId = @userId
 
 --EXEC User_Comments 2
 
 CREATE PROCEDURE User_Blogs @userId INT
 AS
 SELECT * FROM Blogs
-WHERE Blogs.Id = @userId
+WHERE Blogs.UserId = @userId
 
 
 Alter TRIGGER TRG_CHANGE_ISDELETED
